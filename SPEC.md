@@ -1,99 +1,138 @@
 # A2SPA Specification
 ## Execution-Time Authorization for Agentic AI Systems
-### 1. Purpose
+
+---
+
+## 1. Purpose and Scope
+
 This specification defines **execution-time authorization** as a distinct security control
-for agentic AI systems.
-Execution-time authorization requires that every irreversible or side-effecting action
-be cryptographically verified **at the moment of execution**, not merely at request time.
+for agentic and autonomous systems.
+
+A2SPA specifies **what MUST be verified at the moment an action executes** in order for that
+action to be permitted to run.
+
+This specification:
+- defines execution-time authorization guarantees
+- defines verification requirements at the execution boundary
+- defines execution decision semantics (ALLOW / DENY)
+
+This specification does **not** define implementation details, cryptographic primitives,
+key management, orchestration logic, or agent frameworks.
+
 ---
-### 2. Problem Statement
+
+## 2. Definitions
+
+**Action**  
+An operation that produces side effects, including state changes, external calls,
+financial transfers, infrastructure changes, or capability issuance.
+
+**Action Payload**  
+The structured data describing a specific action, including parameters, constraints,
+and validity conditions.
+
+**Execution Boundary**  
+The point at which a decision transitions into an irreversible action.
+
+**Execution-Time Authorization**  
+Cryptographic verification that a specific action payload remains authorized,
+unmodified, valid, and within constraints **at the exact moment execution occurs**.
+
+---
+
+## 3. Problem Statement
+
 Most modern systems enforce security through:
-transport-layer encryption (e.g., TLS)
-identity and access management (RBAC, OAuth, MFA)
-post-execution monitoring and logging
-These controls authenticate *who* may request an action,
-but typically **assume trust once execution begins**.
+- transport-layer protection (e.g., TLS)
+- identity and access management (e.g., IAM, RBAC, OAuth)
+- post-execution monitoring and logging
+
+These controls authenticate **who may request** an action, but typically **assume trust once execution begins**.
+
 In agentic systems with autonomous decision-making, asynchronous execution,
-and reduced human oversight, this assumption creates a critical vulnerability.
+delegation, retries, and reduced human oversight, this assumption creates a critical vulnerability:
+actions may execute under conditions that no longer match the original authorization.
+
 ---
-### 3. Definition: Execution-Time Authorization
-Execution-time authorization is the cryptographic enforcement that:
-a specific action
-with specific parameters
-under explicit constraints
-within a defined validity window
-**is authorized at the exact point of execution**, or the action must not execute.
-Authorization is bound to the action itself, not inferred from identity or transport context.
+
+## 4. Execution-Time Authorization (Normative Definition)
+
+Execution-time authorization requires that:
+
+- a **specific action**
+- with **specific parameters**
+- under **explicit constraints**
+- within a **defined validity window**
+
+**MUST be cryptographically verified at the execution boundary**, or the action **MUST NOT execute**.
+
+Authorization is bound to the **action payload itself**, not inferred from identity,
+session, or transport context.
+
 ---
-### 4. Architectural Gap Addressed
+
+## 5. Architectural Gap Addressed
+
 A2SPA addresses the gap where:
-authorization occurs before execution
-execution happens later, elsewhere, or asynchronously
-payloads may be mutated, replayed, delayed, or escalated
+- authorization occurs before execution
+- execution happens later, elsewhere, or asynchronously
+- action payloads may be mutated, replayed, delayed, or escalated
+
 This gap shifts execution into the primary attack surface.
+
 ---
-### 5. Protocol Components
-A2SPA defines the following components:
-#### 5.1 Execution Payload
-A structured payload containing:
-action type
-parameters
-permissions and constraints
-execution scope
-expiration time
-nonce or freshness value
-#### 5.2 Cryptographic Signature
-The execution payload is cryptographically signed,
-binding:
-who authorized the action
-what action is authorized
-under which constraints
-for how long
-#### 5.3 Freshness Guarantees
-Nonces and/or timestamps ensure:
-replay protection
-context freshness
-single-use or time-bound execution
-#### 5.4 Verification at Execution Boundary
-At the execution boundary, the system MUST:
-extract the signature
-verify payload integrity
-validate freshness
-enforce constraints
-deny execution on failure
-#### 5.5 Execution Artifact
-Upon successful verification, the system emits
-a verifiable execution artifact proving:
-who authorized what
-when execution occurred
-under which constraints
-This artifact is audit-ready and immutable.
+
+## 6. Verification Model
+
+At the execution boundary, the system **MUST** verify the action payload by enforcing:
+
+- **Identity binding** — who authorized the action
+- **Integrity** — what exact action was authorized
+- **Freshness** — whether the authorization is still valid at execution time
+- **Constraints** — whether execution is permitted under the approved scope
+
+If any verification step fails, execution **MUST NOT** occur.
+
 ---
-### 6. Placement in the Stack
-Execution-time authorization logically resides at:
-API endpoints performing writes or side effects
-workflow engines at job dequeue or start
-infrastructure automation triggers
-payment, settlement, or asset transfer execution
-privilege or capability issuance paths
-It gates the transition from **decision → execution**.
+
+## 7. Execution Boundary Semantics
+
+Execution-time authorization gates the transition from **decision → execution**.
+
+The verification step **MUST occur immediately prior to side effects** and **MUST NOT**
+be bypassed by retries, delegation, or agent-to-agent handoff.
+
+Upon successful verification, the system **MAY** emit an execution artifact
+suitable for audit and non-repudiation.
+
 ---
-### 7. Security Properties
-A2SPA enforces:
-explicit intent verification
-non-repudiation
-replay resistance
-constraint enforcement
-execution accountability
+
+## 8. Security Properties
+
+A2SPA provides the following security properties:
+
+- explicit intent verification
+- resistance to payload mutation
+- resistance to replay attacks
+- stale-context execution prevention
+- constraint enforcement at execution time
+- execution accountability
+
 ---
-### 8. Relationship to Existing Controls
-A2SPA does not replace:
-TLS (transport security)
-IAM (identity and access management)
-monitoring or detection systems
-It complements them by enforcing authorization
-**where those controls typically stop**.
+
+## 9. Relationship to Existing Controls
+
+A2SPA does **not** replace:
+- transport security (TLS)
+- identity and access management (IAM)
+- monitoring or detection systems
+
+A2SPA complements these controls by enforcing authorization **where they typically stop**:
+at the execution boundary.
+
 ---
-### 9. Reference Diagrams
-Reference execution flow and control plane diagrams
-are provided in the repository `/diagrams` directory.
+
+## 10. Reference Diagrams
+
+Reference execution flow and control-plane diagrams
+are provided in the repository `./diagrams/` directory.
