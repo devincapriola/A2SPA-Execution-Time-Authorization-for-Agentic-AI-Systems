@@ -107,6 +107,10 @@ Reference diagrams are defined under `./diagrams/`:
 
 ## A2A and MCP Integration (Conceptual)
 
+<p align="center">
+  <img src="./diagrams/a2spa-a2a-mcp-integration.png" width="820" />
+</p>
+
 A2SPA is designed to complement existing agent communication and tool protocols by enforcing authorization **at execution time**, not by redefining how agents communicate or discover capabilities.
 
 ### Agent-to-Agent (A2A)
