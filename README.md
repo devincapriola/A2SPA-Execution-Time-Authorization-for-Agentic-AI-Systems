@@ -77,7 +77,7 @@ Each execution decision produces a clear **ALLOW / DENY** outcome and an auditab
 ## The Execution Boundary
 
 <p align="center">
-  <img src="./diagrams/a2spa-agentic-execution-flow.jpg" width="720" />
+  <img src="./diagrams/a2spa-agentic-execution-flow.png" width="720" />
 </p>
 
 The **execution boundary** is the moment a decision transitions into an irreversible action.
