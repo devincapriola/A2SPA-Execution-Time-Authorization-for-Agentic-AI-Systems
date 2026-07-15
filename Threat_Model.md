@@ -107,12 +107,14 @@ Execution occurs even when authorization context is outdated.
 **A2SPA Control**  
 Expiration and constraint validation enforced at the execution boundary.
 
+This threat is tracked as Freshness Protection — Stale Authorization Context in the canonical specification's evidence matrix (Section 15.2).
+
 **Outcome**  
 Stale or expired actions are denied at execution time.
 
 ---
 
-### 3.4 Spoofed Agent Execution
+### 3.4 Spoofed Agent Execution (Identity Spoofing)
 
 **Threat**  
 An agent or intermediary triggers execution while impersonating a legitimate
@@ -131,7 +133,7 @@ Spoofed executions fail verification and are blocked.
 
 ---
 
-### 3.5 Unauthorized Escalation
+### 3.5 Unauthorized Escalation (Parameter Expansion)
 
 **Threat**  
 An action executes beyond the permissions or constraints originally approved.
@@ -147,7 +149,7 @@ Escalated actions are denied at execution time.
 
 ---
 
-### 3.6 Assumed Trust in Autonomous Workflows
+### 3.6 Assumed Trust in Autonomous Workflows (Verifier Bypass)
 
 **Threat**  
 Systems assume upstream validation guarantees safe execution downstream.
@@ -160,6 +162,22 @@ Execution is gated on real-time verification at the execution boundary.
 
 **Outcome**  
 Execution is permitted only when verification succeeds.
+
+---
+
+### 3.7 Canonicalization Mismatch
+
+**Threat**  
+Divergent serialization or normalization between the Subject Agent and Authorization Verifier causes identical actions to produce different signed byte streams, breaking deterministic verification.
+
+**Risk Without A2SPA**  
+Systems may accept ambiguous or inconsistently serialized payloads, creating room for signature bypass or verification drift.
+
+**A2SPA Control**  
+Mandatory RFC 8785 JCS baseline canonicalization; rejection of duplicate properties, non-UTF-8 streams, and unsupported profiles.
+
+**Outcome**  
+Non-canonical or ambiguous payloads are denied at execution time.
 
 ---
 

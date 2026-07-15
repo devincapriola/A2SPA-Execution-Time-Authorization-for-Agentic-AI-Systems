@@ -52,20 +52,20 @@ An authorized instruction is modified between intent creation and execution.
 ### 2. Replay Attacks
 A previously valid instruction is reused outside its intended time or context.
 
-### 3. Scope Escalation
+### 3. Scope Escalation (Parameter Expansion)
 An agent executes actions beyond what was explicitly authorized.
 
-### 4. Delayed Execution Abuse
+### 4. Delayed Execution Abuse (Freshness — Stale Authorization Context)
 An instruction is executed later than intended, under different conditions.
 
-### 5. Agent Impersonation
+### 5. Agent Impersonation (Identity Spoofing)
 An attacker or compromised agent submits instructions that appear valid but were not authorized.
 
-### 6. Orchestration Bypass
+### 6. Orchestration Bypass (Verifier Bypass)
 Logic executes even when verification fails or is skipped.
 
-### 7. Post-hoc Auditing Fallacy
-Systems that log actions after execution but cannot cryptographically prove authorization beforehand.
+### 7. Canonicalization Mismatch
+Divergent serialization between signer and verifier breaks deterministic verification and can allow ambiguous payloads to pass or fail inconsistently.
 
 ---
 
@@ -203,6 +203,7 @@ A security review is required if a change:
 ## Design Intent Summary
 
 A2SPA exists because:
+- Logging after execution is not proof of prior authorization (post-hoc auditing fallacy)
 - Execution is power
 - Power without authorization is a vulnerability
 - Authorization must be cryptographic
