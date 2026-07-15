@@ -38,7 +38,7 @@ A2SPA:
 - verifies authorization at the execution boundary
 - binds authorization to a specific action payload
 - enforces freshness and constraint validation
-- produces explicit allow/deny execution outcomes
+- produces explicit EXECUTE / DENY / REFER / EXPIRED execution outcomes
 
 A2SPA focuses on **whether an action may execute**, not on how agents reason or communicate.
 
@@ -119,6 +119,8 @@ It defines required verification guarantees but does not mandate specific
 cryptographic algorithms, implementations, or deployment models.
 
 Implementation choices are left to adopters.
+
+Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
 
 ---
 

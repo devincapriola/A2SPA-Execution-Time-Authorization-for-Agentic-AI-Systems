@@ -223,6 +223,8 @@ A2SPA does not define:
 
 These concerns are implementation-specific.
 
+Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
+
 ---
 
 ## 8. Summary

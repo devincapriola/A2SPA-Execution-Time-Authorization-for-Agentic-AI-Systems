@@ -27,7 +27,7 @@ Specifically, A2SPA provides:
 - integrity checking of the action payload at execution time
 - freshness validation to prevent replay or stale execution
 - constraint enforcement at the execution boundary
-- explicit allow/deny outcomes prior to irreversible execution
+- explicit EXECUTE / DENY / REFER / EXPIRED outcomes prior to irreversible execution
 
 A2SPA operates **immediately before execution** of an action that produces
 irreversible side effects.
@@ -143,6 +143,8 @@ A2SPA does not mandate:
 These are implementation choices left to adopters.
 
 A2SPA specifies **what must be verified**, not **how verification is implemented**.
+
+Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
 
 ---
 

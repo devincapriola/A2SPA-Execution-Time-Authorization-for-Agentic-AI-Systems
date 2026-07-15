@@ -150,7 +150,7 @@ If **any gate fails**, execution **must not occur**.
 
 Every authorization attempt should produce a record containing:
 - Payload identifier (or hash reference)
-- Verification result (pass / fail)
+- Authorization Decision (EXECUTE / DENY / REFER / EXPIRED)
 - Reason for failure (if applicable)
 - Timestamp
 - Agent identity

@@ -181,6 +181,8 @@ A2SPA defines **what must be verified**, not **how it is implemented**.
 Cryptographic primitives, key management, and serialization formats
 are implementation choices left to adopters.
 
+Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
+
 ---
 
 ## Is A2SPA a standard or an implementation?

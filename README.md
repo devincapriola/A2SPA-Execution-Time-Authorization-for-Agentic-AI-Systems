@@ -69,7 +69,7 @@ Specifically, it addresses:
 These threats are not prevented by TLS or IAM because they occur **at the execution boundary**, not during transport or authentication.
 
 A2SPA enforces a deny-by-default posture at execution time:  
-Each execution decision produces a clear **ALLOW / DENY** outcome and an auditable record suitable for downstream logging and review.
+Each execution decision produces a canonical **EXECUTE / DENY / REFER / EXPIRED** outcome and an auditable record suitable for downstream logging and review.
 
 **If an action cannot be verified, it does not execute.**
 
@@ -165,7 +165,8 @@ These are implementation choices left to adopters; A2SPA defines the verificatio
 
 This repository is intended to serve as a **reference protocol** for execution-time authorization.
 
-- **Specification:** `SPEC.md`
+- **Specification:** [`spec/A2SPA_Core_Protocol_Specification_v0.9.1_clean.md`](spec/A2SPA_Core_Protocol_Specification_v0.9.1_clean.md)
+- **Distribution formats:** `.docx` and `.pdf` versions are available in the same `spec/` folder.
 - **Threat model:** `Threat_Model.md`
 - **Standard / terminology:** `STANDARD.md`
 - **FAQ:** `FAQ.md`
