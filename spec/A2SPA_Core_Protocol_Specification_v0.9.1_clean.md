@@ -145,6 +145,7 @@ The A2SPA threat model assumes an environment where execution requests originati
 |---|---|---|---|
 | Payload Mutation | Integrity | Section 12 canonicalization bound to cryptographic signatures. | SA generation and AV validation |
 | Replay Attacks | Freshness | Single-use Challenge Nonces and bounded TTL. | EEP generation and AV verification |
+| Delayed Execution with Stale Context | Freshness Protection | Bounded Validity Interval + independent context revalidation. | EEP generation and AV verification |
 | Identity Spoofing | Authenticity | Public-key verification using Ed25519 baseline. | AV cryptographic evaluation |
 | Parameter Expansion | Authorization | Independent evaluation of parameters against explicit rules. | AV policy engine |
 | Verifier Bypass | Enforcement Integrity | Mandatory EEP traversal and admission control. | EEP structural control |
@@ -382,6 +383,7 @@ A2SPA is designed to complement identity, policy, and transport-security systems
 |---|---|---|---|---|
 | Payload Mutation | Integrity | RFC 8785 JCS + signature verification | Modified payload fails validation and enters REJECTED. | Upstream compromise of signing authority. |
 | Replay Attacks | Freshness | EEP nonce + TTL | Replay fails nonce or TTL check. | EEP nonce cache compromise. |
+| Delayed Execution with Stale Context | Freshness Protection | Bounded Validity Interval enforced independently of nonce reuse | Execution outside the approved authorization window is denied even if the nonce is still technically unconsumed. | Authorization context (permissions, environment) drifting within an otherwise-valid TTL window. |
 | Identity Spoofing | Authenticity | Ed25519 verification | Forged or unmapped requests fail. | Private key theft. |
 | Parameter Expansion | Authorization | AV policy evaluation | Out-of-bounds parameters rejected. | Logical policy flaws. |
 | Verifier Bypass | Enforcement Integrity | Mandatory EEP invariant | Payload lacking AV grant rejected. | Misconfigured topology. |
