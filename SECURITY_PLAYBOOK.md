@@ -35,7 +35,7 @@ A2SPA is an **execution-time authorization layer** that:
 - Verifies a signed payload immediately before execution
 - Ensures the payload has not been altered, replayed, or exceeded its scope
 - Enforces permissions, timing, and constraints at runtime
-- Produces a verifiable audit trail for every authorized or rejected action
+- Produces signed receipts for authorized and receipt-bearing non-authorized outcomes
 
 A2SPA does **not** decide *what* an agent should do.  
 It decides **whether an action is allowed to execute right now**.
@@ -118,19 +118,19 @@ Before **any action executes**, all of the following must be true:
 
 3. **Permission Scope**
    - Action requested is explicitly allowed
-   - Directional permissions (send / receive / execute) are enforced
+   - Sender, target, and policy constraints are enforced
 
 4. **Temporal Validity**
    - Timestamp is valid
-   - Payload has not expired
+   - Payload is within the freshness window
 
 5. **Replay Protection**
    - Nonce has not been used before
    - Reuse results in rejection
 
 6. **Agent State**
-   - Agent is enabled and authorized
-   - Disabled agents cannot execute
+   - Sender is enabled and authorized
+   - Receiver or target is available where policy requires it
 
 If **any gate fails**, execution **must not occur**.
 
@@ -150,7 +150,7 @@ If **any gate fails**, execution **must not occur**.
 
 Every authorization attempt should produce a record containing:
 - Payload identifier (or hash reference)
-- Authorization Decision (EXECUTE / DENY / REFER / EXPIRED)
+- Authorization Decision (`authorized`, `refer_hold`, `denied`, or fail-closed verifier error)
 - Reason for failure (if applicable)
 - Timestamp
 - Agent identity

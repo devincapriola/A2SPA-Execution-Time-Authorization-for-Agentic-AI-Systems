@@ -176,26 +176,23 @@ A2SPA enforces verification, not who performs approval.
 
 No.
 
-A2SPA defines **what must be verified**, not **how it is implemented**.
+A2SPA defines **what must be verified**, and versioned compatibility profiles define how specific implementations interoperate.
 
-Cryptographic primitives, key management, and serialization formats
-are implementation choices left to adopters.
-
-Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
+The current public A2SPA `0.1.3` helper packages use RSA PKCS#1 v1.5 with SHA-256 over the Signed Bytes V1 compatibility profile, with optional ML-DSA where supported. Ed25519 and RFC 8785 JCS are not current public baseline requirements.
 
 ---
 
-## Is A2SPA a standard or an implementation?
+## Is A2SPA an adopted standard or an implementation?
 
-This repository defines a **reference protocol and specification**.
+No. This repository is an independent technical working draft.
 
 It is intended to:
 - guide implementations
 - support security reviews
-- inform standards discussions
+- support external technical discussion
 - establish consistent terminology
 
-It is not a software library.
+It is not an adopted standard, certification program, security audit, or software library.
 
 ---
 

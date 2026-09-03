@@ -27,7 +27,7 @@ Specifically, A2SPA provides:
 - integrity checking of the action payload at execution time
 - freshness validation to prevent replay or stale execution
 - constraint enforcement at the execution boundary
-- explicit EXECUTE / DENY / REFER / EXPIRED outcomes prior to irreversible execution
+- explicit `authorized`, `refer_hold`, `denied`, or fail-closed verifier outcomes prior to irreversible execution
 
 A2SPA operates **immediately before execution** of an action that produces
 irreversible side effects.
@@ -144,7 +144,7 @@ These are implementation choices left to adopters.
 
 A2SPA specifies **what must be verified**, not **how verification is implemented**.
 
-Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
+The current public A2SPA `0.1.3` compatibility profile uses RSA PKCS#1 v1.5 with SHA-256 over Signed Bytes V1, with optional ML-DSA where the verifier and sender key support it. It does not mandate Ed25519 or RFC 8785 JCS as the current public baseline.
 
 ---
 
@@ -153,7 +153,7 @@ Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-ag
 This document is intended for:
 - security and risk teams
 - compliance and legal reviewers
-- standards bodies
+- external technical reviewers
 - auditors evaluating agentic systems
 - organizations deploying autonomous execution
 

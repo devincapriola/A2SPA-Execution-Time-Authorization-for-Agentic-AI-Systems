@@ -12,7 +12,7 @@ It is intended for:
 - journalists
 - analysts
 - researchers
-- standards bodies
+- external technical reviewers
 - third-party commentators
 
 The goal is accuracy, not promotion.
@@ -38,7 +38,7 @@ A2SPA:
 - verifies authorization at the execution boundary
 - binds authorization to a specific action payload
 - enforces freshness and constraint validation
-- produces explicit EXECUTE / DENY / REFER / EXPIRED execution outcomes
+- produces explicit `authorized`, `refer_hold`, `denied`, or fail-closed execution outcomes
 
 A2SPA focuses on **whether an action may execute**, not on how agents reason or communicate.
 
@@ -113,14 +113,13 @@ A2SPA is relevant to:
 
 ## Status and Scope
 
-A2SPA is published as a **reference protocol** and conceptual standard.
+A2SPA is published as an independent technical working draft.
 
-It defines required verification guarantees but does not mandate specific
-cryptographic algorithms, implementations, or deployment models.
+It defines verification guarantees and versioned compatibility profiles but is not an adopted standard, certification program, or security audit.
 
 Implementation choices are left to adopters.
 
-Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
+The current public A2SPA `0.1.3` compatibility profile uses RSA PKCS#1 v1.5 with SHA-256 over Signed Bytes V1, with optional ML-DSA where supported. It does not mandate Ed25519 or RFC 8785 JCS as the current public baseline.
 
 ---
 

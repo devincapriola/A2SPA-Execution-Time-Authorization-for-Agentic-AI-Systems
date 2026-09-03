@@ -1,4 +1,4 @@
-# A2SPA Standard
+# A2SPA Terminology
 ## Terminology and Normative Definitions
 
 ---
@@ -9,8 +9,7 @@ This document defines the normative terminology and conceptual boundaries
 used throughout the A2SPA (Agent-to-Secure Payload Authorization) specification.
 
 Its purpose is to ensure consistent interpretation of execution-time
-authorization concepts across implementations, reviews, and standards
-discussions.
+authorization concepts across implementations and external reviews.
 
 Unless otherwise stated, key words such as **MUST**, **MUST NOT**, **SHOULD**,
 and **MAY** are to be interpreted as described in RFC 2119.
@@ -223,13 +222,13 @@ A2SPA does not define:
 
 These concerns are implementation-specific.
 
-Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
+This terminology document does not mandate algorithms or serialization formats. The current public A2SPA `0.1.3` compatibility profile is documented in `spec/A2SPA_Core_Protocol_Specification_v0.9.2.md`, and unsupported profiles must fail closed rather than silently downgrade.
 
 ---
 
 ## 8. Summary
 
-A2SPA standardizes execution-time authorization as a distinct security control
+A2SPA defines execution-time authorization as a distinct security control
 plane.
 
 It enforces a single invariant:

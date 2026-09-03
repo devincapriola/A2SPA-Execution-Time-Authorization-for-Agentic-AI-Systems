@@ -22,7 +22,7 @@ It evaluates actions, not requests, and enforces policy at the moment irreversib
 </p>
 
 
-This repository is a reference specification for execution-time authorization in agentic systems (not an implementation), intended for security review, standards discussion, and system design.
+This repository is an independent technical working draft for execution-time authorization in agentic systems. It is not an implementation, adopted standard, certification program, or security audit.
 
 Audience: security architects, agent framework builders, and teams deploying autonomous or asynchronous workflows.
 
@@ -69,7 +69,7 @@ Specifically, it addresses:
 These threats are not prevented by TLS or IAM because they occur **at the execution boundary**, not during transport or authentication.
 
 A2SPA enforces a deny-by-default posture at execution time:  
-Each execution decision produces a canonical **EXECUTE / DENY / REFER / EXPIRED** outcome and an auditable record suitable for downstream logging and review.
+Each execution decision produces an explicit outcome such as `authorized`, `refer_hold`, `denied`, or a fail-closed verifier error, with audit evidence suitable for downstream logging and review.
 
 **If an action cannot be verified, it does not execute.**
 
@@ -163,15 +163,17 @@ These are implementation choices left to adopters; A2SPA defines the verificatio
 
 ## Documentation and Next Steps
 
-This repository is intended to serve as a **reference protocol** for execution-time authorization.
+This repository is intended to serve as a reviewable technical draft for execution-time authorization.
 
-- **Specification:** [`spec/A2SPA_Core_Protocol_Specification_v0.9.1_clean.md`](spec/A2SPA_Core_Protocol_Specification_v0.9.1_clean.md)
-- **Distribution formats:** `.docx` and `.pdf` versions are available in the same `spec/` folder.
+- **Specification:** [`spec/A2SPA_Core_Protocol_Specification_v0.9.2.md`](spec/A2SPA_Core_Protocol_Specification_v0.9.2.md)
+- **Implementation snapshot:** public A2SPA app/API and helper packages `0.1.3`
+- **Public API:** `https://api.aimodularity.com/A2SPA`
+- **Helper packages:** Python `a2spa==0.1.3`, Node.js `a2spa@0.1.3`
 - **Threat model:** `Threat_Model.md`
-- **Standard / terminology:** `STANDARD.md`
+- **Terminology:** `STANDARD.md`
 - **FAQ:** `FAQ.md`
 - **Compliance & neutral language:** `COMPLIANCE.md`, `PRESS_NEUTRAL.md`
 
-Future updates will include reference architecture diagrams under `./diagrams/` to illustrate execution boundary enforcement across agent-to-agent flows and MCP-style tool execution.
+The older `v0.9.1-clean` Word/PDF draft has been removed because it contained stale claims that do not match the current public implementation. Reference diagrams under `./diagrams/` illustrate execution boundary enforcement across agent-to-agent flows and MCP-style tool execution.
 
 Execution is where autonomy becomes risk — and where authorization must be enforced.

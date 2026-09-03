@@ -174,7 +174,7 @@ Divergent serialization or normalization between the Subject Agent and Authoriza
 Systems may accept ambiguous or inconsistently serialized payloads, creating room for signature bypass or verification drift.
 
 **A2SPA Control**  
-Mandatory RFC 8785 JCS baseline canonicalization; rejection of duplicate properties, non-UTF-8 streams, and unsupported profiles.
+Versioned signed-byte compatibility profiles; rejection of mismatched, malformed, or unsupported profiles without silent downgrade.
 
 **Outcome**  
 Non-canonical or ambiguous payloads are denied at execution time.

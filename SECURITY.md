@@ -43,7 +43,7 @@ These concerns are **explicitly out of scope** for this repository.
 A2SPA defines **what must be verified at execution time**, not how
 verification must be implemented.
 
-Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-agnostic. As of v0.9.0, the specification mandates baseline cryptographic and canonicalization profiles (Ed25519, RFC 8785 JCS) to enable interoperable, conformant implementations. See CHANGELOG.md.
+The current public A2SPA `0.1.3` compatibility profile uses RSA PKCS#1 v1.5 with SHA-256 over Signed Bytes V1, with optional ML-DSA where the verifier and sender key support it. Unsupported or mismatched profiles must fail closed rather than silently downgrade.
 
 ---
 
@@ -51,14 +51,14 @@ Earlier drafts of this specification (pre-0.9.0) were intentionally algorithm-ag
 
 The canonical specification defines a fail-closed invariant: if authorization cannot be verified, execution must not proceed.
 
-Section 16 of [`spec/A2SPA_Core_Protocol_Specification_v0.9.1_clean.md`](spec/A2SPA_Core_Protocol_Specification_v0.9.1_clean.md) defines the canonical Authorization Decision classes and error codes, including success code `1000` and failure/review codes `2001` through `2014`.
+Section 11 of [`spec/A2SPA_Core_Protocol_Specification_v0.9.2.md`](spec/A2SPA_Core_Protocol_Specification_v0.9.2.md) describes current decision and HTTP handling. Integrations must accept only `success: true` plus receipt decision `authorized`; malformed responses, timeouts, verifier errors, `refer_hold`, and `denied` are not execution authorization.
 
 ---
 
 ## Disclaimer
 
-This repository is provided for architectural, research, and standards
-discussion purposes only.
+This repository is provided for architectural, research, and technical review
+purposes only.
 
 The authors make no guarantees regarding the security, completeness,
 or fitness of downstream implementations.

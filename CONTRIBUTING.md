@@ -2,7 +2,7 @@
 
 This repository is a reference specification, not an implementation repository.
 
-Issue creation is currently restricted intentionally while the specification is being stabilized for security review and standards discussion. To propose specification changes, terminology clarifications, threat-model updates, or related-work links, contact the maintainers through the preferred private or project-designated channel.
+Issue creation is currently restricted intentionally while the specification is being stabilized for security review and external technical discussion. To propose specification changes, terminology clarifications, threat-model updates, or related-work links, contact the maintainers through the preferred private or project-designated channel.
 
 When proposing a change, include:
 
